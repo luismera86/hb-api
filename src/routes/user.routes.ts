@@ -1,6 +1,18 @@
-import { Router } from 'express';
-import { getUsers } from '../controllers/user.controllers';
+import { BaseRouter } from './index.routes';
+import { UserController } from '../controllers/user.controllers';
 
-export const userRoutes = Router()
+class UserRoutes extends BaseRouter {
+  private controller = new UserController();
 
-userRoutes.get('/', getUsers)
+  constructor() {
+    super();
+  }
+
+  public routes(): void {
+    this.router.get('/user', this.controller.getUsers);
+    this.router.get('/user/:dni', this.controller.getUserByDni);
+    this.router.post('/user', this.controller.postUser);
+    this.router.put('/user', this.controller.putUser);
+    this.router.delete('/user', this.controller.deleteUser);
+  }
+}

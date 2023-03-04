@@ -1,6 +1,11 @@
 import { Router } from 'express';
-import { userRoutes } from './user.routes';
 
-export const routes = Router();
+export class BaseRouter {
+  public router = Router();
 
-routes.use('/user', userRoutes);
+  constructor() {
+    this.routes();
+  }
+
+  public routes() {}
+}

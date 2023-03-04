@@ -29,6 +29,16 @@ const userSchema = new Schema<User>({
   redWards: {
     type: Number,
   },
+  dni: {
+    type: Number,
+  },
+  address: {
+    type: String,
+  },
+  phone: {
+    type: Number,
+  },
+  
 });
 
 export const UserSchema = model('User', userSchema)
