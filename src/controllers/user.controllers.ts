@@ -1,14 +1,12 @@
 import { Request, Response } from 'express';
+import { createUser, deleteUser, findAllUsers, findOneUser, updateUser } from '../services';
 
 import { User } from '../interfaces';
-import { UserServices } from '../services/user.services';
 
-export class UserController {
-  private userServices = new UserServices();
-
-  public async getUsers(req: Request, resp: Response): Promise<void> {
+export async function getUsers(req: Request, resp: Response): Promise<void> {
     try {
-      const users: User[] = await this.userServices.findAllUsers();
+      console.log('aqui')
+      const users: User[] = await findAllUsers();
       resp.json({
         resp: true,
         users,
@@ -19,10 +17,10 @@ export class UserController {
     }
   }
 
-  public async getUserByDni(req: Request, resp: Response): Promise<void> {
+   export async function getUserByDni(req: Request, resp: Response): Promise<void> {
     const dni = req.params;
     try {
-      const user = await this.userServices.findOneUser(Number(dni));
+      const user = await findOneUser(Number(dni));
       if (!user) {
         resp.json(400).json({ status: false, msg: 'Cant not find user' });
         return;
@@ -38,10 +36,10 @@ export class UserController {
     }
   }
 
-  public async postUser(req: Request, resp: Response): Promise<void> {
+   export async function postUser(req: Request, resp: Response): Promise<void> {
     const body = req.body;
     try {
-      const user = await this.userServices.createUser(body);
+      const user = await createUser(body);
       if (!user) {
         resp.json(400).json({ status: false, msg: 'Cant not find user' });
         return;
@@ -57,10 +55,10 @@ export class UserController {
     }
   }
 
-  public async putUser(req: Request, resp: Response): Promise<void> {
+   export async function putUser(req: Request, resp: Response): Promise<void> {
     const body = req.body;
     try {
-      const user = await this.userServices.updateUser(body);
+      const user = await updateUser(body);
       if (!user) {
         resp.json(400).json({ status: false, msg: 'Cant not find user' });
         return;
@@ -76,10 +74,10 @@ export class UserController {
     }
   }
 
-  public async deleteUser(req: Request, resp: Response): Promise<void> {
+   export async function deleteUserByDni(req: Request, resp: Response): Promise<void> {
     const dni = req.params;
     try {
-      const user = await this.userServices.deleteUser(Number(dni));
+      const user = await deleteUser(Number(dni));
       if (!user) {
         resp.json(400).json({ status: false, msg: 'Cant not find user' });
         return;
@@ -94,4 +92,4 @@ export class UserController {
       resp.status(500);
     }
   }
-}
+

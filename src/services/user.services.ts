@@ -1,24 +1,24 @@
 import { User } from '../interfaces';
 import { UserSchema } from '../models';
 
-export class UserServices {
-  public async findAllUsers(): Promise<User[]> {
-    return await UserSchema.find();
-  }
+export async function findAllUsers(): Promise<User[]> {
+  const users = await UserSchema.find();
+   
+  return users;
+}
 
-  public async findOneUser(dni: number): Promise<User | null> {
-    return await UserSchema.findOne({ dni });
-  }
+export async function findOneUser(dni: number): Promise<User | null> {
+  return await UserSchema.findOne({ dni });
+}
 
-  public async createUser(user: User): Promise<User | null> {
-    return await UserSchema.create(user);
-  }
+export async function createUser(user: User): Promise<User | null> {
+  return await UserSchema.create(user);
+}
 
-  public async updateUser(user: User): Promise<User | null> {
-    return await UserSchema.findOneAndUpdate({ dni: user.dni }, { user });
-  }
+export async function updateUser(user: User): Promise<User | null> {
+  return await UserSchema.findOneAndUpdate({ dni: user.dni }, { user });
+}
 
-  public async deleteUser(dni: number): Promise<User | null> {
-    return await UserSchema.findOneAndDelete({ dni });
-  }
+export async function deleteUser(dni: number): Promise<User | null> {
+  return await UserSchema.findOneAndDelete({ dni });
 }

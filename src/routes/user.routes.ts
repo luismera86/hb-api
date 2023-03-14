@@ -1,18 +1,11 @@
-import { BaseRouter } from './index.routes';
-import { UserController } from '../controllers/user.controllers';
+import { deleteUserByDni, getUserByDni, getUsers, postUser, putUser } from "../controllers";
 
-class UserRoutes extends BaseRouter {
-  private controller = new UserController();
+import { Router } from "express";
 
-  constructor() {
-    super();
-  }
+export const userRoutes = Router()
 
-  public routes(): void {
-    this.router.get('/user', this.controller.getUsers);
-    this.router.get('/user/:dni', this.controller.getUserByDni);
-    this.router.post('/user', this.controller.postUser);
-    this.router.put('/user', this.controller.putUser);
-    this.router.delete('/user', this.controller.deleteUser);
-  }
-}
+userRoutes.get('/', getUsers)
+userRoutes.get('/:dni', getUserByDni)
+userRoutes.post('/', postUser)
+userRoutes.put('/', putUser)
+userRoutes.delete('/:dni', deleteUserByDni)
