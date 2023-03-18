@@ -7,7 +7,7 @@ const userSchema = new Schema<User>({
     type: String,
   },
   cbu: {
-    type: Number,
+    type: String,
     unique: true,
   },
   email: {
@@ -36,6 +36,9 @@ const userSchema = new Schema<User>({
     type: String,
   },
   phone: {
+    type: Number,
+  },
+  amount: {
     type: Number,
   },
   

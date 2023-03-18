@@ -2,7 +2,7 @@
 export interface User {
   name: string;
   lastName: string;
-  cbu: number;
+  cbu: string;
   alias: string;
   redWards: number;
   email: string;
@@ -11,4 +11,5 @@ export interface User {
   dni: number;
   address: string;
   phone: number;
+  amount: number;
 }

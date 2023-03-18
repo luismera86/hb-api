@@ -5,7 +5,6 @@ import { User } from '../interfaces';
 
 export async function getUsers(req: Request, resp: Response): Promise<void> {
     try {
-      console.log('aqui')
       const users: User[] = await findAllUsers();
       resp.json({
         resp: true,
@@ -37,9 +36,11 @@ export async function getUsers(req: Request, resp: Response): Promise<void> {
   }
 
    export async function postUser(req: Request, resp: Response): Promise<void> {
-    const body = req.body;
+     const body = req.body;
+     console.log(body)
     try {
       const user = await createUser(body);
+      console.log(user)
       if (!user) {
         resp.json(400).json({ status: false, msg: 'Cant not find user' });
         return;
@@ -50,7 +51,7 @@ export async function getUsers(req: Request, resp: Response): Promise<void> {
         user,
       });
     } catch (error) {
-      console.log(500);
+      console.log(error);
       resp.status(500);
     }
   }

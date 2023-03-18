@@ -12,7 +12,8 @@ export async function findOneUser(dni: number): Promise<User | null> {
 }
 
 export async function createUser(user: User): Promise<User | null> {
-  return await UserSchema.create(user);
+  const newUser = await UserSchema.create(user);
+  return newUser
 }
 
 export async function updateUser(user: User): Promise<User | null> {
