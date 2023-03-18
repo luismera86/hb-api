@@ -1,25 +1,25 @@
 import { User } from '../interfaces';
 import { UserSchema } from '../models';
 
-export async function findAllUsers(): Promise<User[]> {
+export const findAllUsers = async (): Promise<User[]> => {
   const users = await UserSchema.find();
-   
+
   return users;
-}
+};
 
-export async function findOneUser(dni: number): Promise<User | null> {
+export const findOneUser = async (dni: number): Promise<User | null> => {
   return await UserSchema.findOne({ dni });
-}
+};
 
-export async function createUser(user: User): Promise<User | null> {
+export const createUser = async (user: User): Promise<User | null> => {
   const newUser = await UserSchema.create(user);
-  return newUser
-}
+  return newUser;
+};
 
-export async function updateUser(user: User): Promise<User | null> {
+export const updateUser = async (user: User): Promise<User | null> => {
   return await UserSchema.findOneAndUpdate({ dni: user.dni }, { user });
-}
+};
 
-export async function deleteUser(dni: number): Promise<User | null> {
+export const deleteUser = async (dni: number): Promise<User | null> => {
   return await UserSchema.findOneAndDelete({ dni });
-}
+};
